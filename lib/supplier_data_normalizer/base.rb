@@ -1,4 +1,3 @@
-# normalizer = "SupplierDataNormalizer::#{supplier.name.classify}".constantize.new
 module SupplierDataNormalizer
   class Base
     def perform(supplier)
