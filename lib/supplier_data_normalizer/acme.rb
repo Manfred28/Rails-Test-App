@@ -2,11 +2,8 @@ module SupplierDataNormalizer
   class Acme < Base
     private
 
-    def hotel_list
-      source = 'https://5f2be0b4ffc88500167b85a0.mockapi.io/suppliers/acme'
-      resp = Net::HTTP.get_response(URI.parse(source))
-      data = resp.body
-      JSON.parse(data)
+    def source
+      'https://5f2be0b4ffc88500167b85a0.mockapi.io/suppliers/acme'
     end
 
     def supplier_code(hotel, normalized_hotel)
@@ -37,7 +34,7 @@ module SupplierDataNormalizer
 
     def amenities(hotel, normalized_hotel)
       normalized_hotel[:amenities] = {
-        other: hotel['Facilities'].map{ |f| f.strip.downcase }
+        other: hotel['Facilities'].map { |f| f.strip.downcase }
       }
     end
 

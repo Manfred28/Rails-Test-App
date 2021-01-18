@@ -4,7 +4,7 @@ module SupplierDataNormalizer
     def perform(supplier)
       hotel_list.map { |hotel| normalize(hotel) }
     rescue StandardError => e
-      Rails.logger.info "Something went wrong while normalizing list of supplier #{supplier.id}"
+      Rails.logger.info "Something went wrong while normalizing list of supplier with id #{supplier.id}"
       Rails.logger.info e
     end
 
@@ -24,8 +24,12 @@ module SupplierDataNormalizer
     end
 
     def hotel_list
-      []
+      resp = Net::HTTP.get_response(URI.parse(source))
+      data = resp.body
+      JSON.parse(data)
     end
+
+    def source; end
 
     def supplier_code(hotel, normalized_hotel); end
 
