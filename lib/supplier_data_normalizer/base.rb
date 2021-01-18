@@ -29,6 +29,10 @@ module SupplierDataNormalizer
       JSON.parse(data)
     end
 
+    def downcase_list_elements(list)
+      list&.map { |f| f.strip.downcase } || []
+    end
+
     def source; end
 
     def supplier_code(hotel, normalized_hotel); end

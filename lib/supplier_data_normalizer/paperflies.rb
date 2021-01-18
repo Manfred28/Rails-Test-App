@@ -31,22 +31,22 @@ module SupplierDataNormalizer
 
     def amenities(hotel, normalized_hotel)
       normalized_hotel[:amenities] = {
-        general: hotel['amenities']&.[]('general')&.map { |f| f.strip.downcase },
-        room: hotel['amenities']&.[]('room')&.map { |f| f.strip.downcase }
+        general: downcase_list_elements(hotel['amenities']&.[]('general')),
+        room: downcase_list_elements(hotel['amenities']&.[]('room'))
       }
     end
 
     def images(hotel, normalized_hotel)
       normalized_hotel[:images] = {
         rooms: hotel['images']&.[]('rooms')
-          &.map { |image| return { image: image['link']}, descripion: image['caption'] },
+          &.map { |image| return { image: image['link']}, descripion: image['caption'] } || [],
         site: hotel['images']&.[]('site')
-          &.map { |image| return { image: image['link']}, descripion: image['caption'] }
+          &.map { |image| return { image: image['link']}, descripion: image['caption'] } || []
       }
     end
 
     def booking_conditions(hotel, normalized_hotel)
-      normalized_hotel[:booking_conditions] = hotel['booking_conditions']&.map{ |f| f.strip.downcase }
+      normalized_hotel[:booking_conditions] = downcase_list_elements(hotel['booking_conditions'])
     end
   end
 end

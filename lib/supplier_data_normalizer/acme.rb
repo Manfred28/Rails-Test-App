@@ -34,7 +34,7 @@ module SupplierDataNormalizer
 
     def amenities(hotel, normalized_hotel)
       normalized_hotel[:amenities] = {
-        other: hotel['Facilities'].map { |f| f.strip.downcase }
+        other: downcase_list_elements(hotel['Facilities'])
       }
     end
 
