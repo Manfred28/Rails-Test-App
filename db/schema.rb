@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_17_120250) do
+ActiveRecord::Schema.define(version: 2021_01_18_161556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,10 +44,10 @@ ActiveRecord::Schema.define(version: 2021_01_17_120250) do
     t.string "name"
     t.string "description"
     t.integer "destination_id"
-    t.jsonb "location"
-    t.jsonb "amenities"
-    t.jsonb "images"
-    t.jsonb "booking_conditions"
+    t.jsonb "location", default: {}
+    t.jsonb "amenities", default: {}
+    t.jsonb "images", default: {}
+    t.jsonb "booking_conditions", default: []
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "supplier_code"
