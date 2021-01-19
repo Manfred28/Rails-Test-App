@@ -32,9 +32,13 @@ module SupplierDataNormalizer
       }
     end
 
+    # This produces some odd results, like 'wi fi' and 'bath tub'
+    # However, simply downcasing produces 'businesscenter' while elsewhere it's 'business center'
+    # Since these go to the 'other' category, this is probably not too important
     def amenities(hotel, normalized_hotel)
       normalized_hotel[:amenities] = {
-        other: downcase_list_elements(hotel['Facilities'])
+        other: (hotel['Facilities'] || [])
+          .map { |amenity| amenity.underscore.gsub('_', ' ').strip }
       }
     end
 
